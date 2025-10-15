@@ -30,7 +30,7 @@
       overflow: hidden;
     }
 
-    /* 🌆 Arrière-plan dynamique avec animation fluide */
+    /* 🌆 Arrière-plan animé */
     .background {
       position: fixed;
       top: 0; left: 0;
@@ -57,7 +57,7 @@
       z-index: -1;
     }
 
-    /* Bouton fond */
+    /* Bouton de fond */
     .bg-button {
       position: fixed;
       top: 15px;
@@ -112,31 +112,41 @@
       margin-bottom: 25px;
     }
 
-    .discord-card img {
-      width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
+    /* 📸 Image de profil + statut */
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-pic {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #5865f2;
+      box-shadow: 0 0 25px rgba(88, 101, 242, 0.5);
       margin-bottom: 20px;
       transition: transform 0.3s ease;
     }
 
-    .discord-card img:hover { transform: scale(1.02); }
+    .profile-pic:hover { transform: scale(1.05); }
 
-    .status {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9em;
-      color: #b9bbbe;
-      margin-bottom: 20px;
+    .status-dot {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 3px solid #1a1a1a;
+      background-color: gray;
     }
 
-    .status-icon {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      display: inline-block;
+    /* ✨ Mini description */
+    .mini-desc {
+      color: #b9bbbe;
+      font-size: 0.9em;
+      margin-bottom: 25px;
     }
 
     /* Bouton Expériences */
@@ -197,15 +207,15 @@
     <h1>Loucas</h1>
     <p class="bio">🇫🇷 French Administrator & Discord Moderator</p>
 
-    <div class="discord-card">
-      <a href="https://discord.com/users/924263589798346762" target="_blank">
-        <img src="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true&borderRadius=15px" alt="Discord Presence" />
-      </a>
+    <!-- 📸 Profil + statut -->
+    <div class="profile-container">
+      <img class="profile-pic" src="https://media.discordapp.net/attachments/1389549494143553657/1428005144359862314/dda9de54ce152f8e2c45b74349161cf0.webp?ex=68f0eced&is=68ef9b6d&hm=32359354021aa7bb1c3ccfba9708bfe05d99142f5f6aa5211b604e37f56e49bc&=&format=webp" alt="Loucas profile picture">
+      <span class="status-dot" id="status-dot"></span>
     </div>
 
-    <div class="status">
-      <span id="status-icon" class="status-icon offline"></span>
-    </div>
+    <p class="mini-desc">👔 Bonjour, je suis Loucas, Administrateur et membre du staff Discord.
+J’assure la modération, la gestion et la coordination du serveur afin de garantir une expérience agréable et bienveillante pour tous les membres.
+Sérieux, à l’écoute et disponible, je veille à maintenir un environnement sain et respectueux au sein de la communauté.</p>
 
     <a href="experiences.html" class="btn">
       <i class="fa-solid fa-briefcase"></i> Expériences
@@ -231,22 +241,46 @@
     let currentBg = 0;
     const bgEl = document.getElementById("background");
 
-    // ✅ Changement fluide et fonctionnel
     function changeBackground() {
-      bgEl.style.opacity = 0; // fondu sortant
+      bgEl.style.opacity = 0;
       setTimeout(() => {
         currentBg = (currentBg + 1) % cityBackgrounds.length;
         bgEl.style.backgroundImage = `url('${cityBackgrounds[currentBg]}')`;
-        bgEl.style.opacity = 1; // fondu entrant
+        bgEl.style.opacity = 1;
       }, 600);
     }
 
-    // Initialise le premier fond
     bgEl.style.backgroundImage = `url('${cityBackgrounds[0]}')`;
-
-    // Changement automatique toutes les 15 secondes
     setInterval(changeBackground, 15000);
+
+    // ✅ Statut Discord via Lanyard API
+    const userId = "1324013060914151486"; // Ton ID Discord
+    const statusDot = document.getElementById("status-dot");
+
+    async function updateStatus() {
+      try {
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+        const data = await res.json();
+        if (data && data.success) {
+          const status = data.data.discord_status;
+          let color = "gray";
+          switch (status) {
+            case "online": color = "#43b581"; break;    // vert
+            case "idle": color = "#faa61a"; break;      // jaune
+            case "dnd": color = "#f04747"; break;       // rouge
+            case "offline": color = "#747f8d"; break;   // gris
+          }
+          statusDot.style.backgroundColor = color;
+        }
+      } catch (err) {
+        console.error("Erreur de statut Discord :", err);
+      }
+    }
+
+    updateStatus();
+    setInterval(updateStatus, 10000); // met à jour toutes les 10s
   </script>
 </body>
 </html>
+
 
