@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-   <!-- ✅ Open Graph Meta (Discord / Facebook / etc.) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loucas - Portfolio</title>
+
+  <!-- ✅ Open Graph Meta (Discord / Facebook / etc.) -->
   <meta property="og:title" content="Loucas - French Discord Administrator & Moderator" />
   <meta property="og:description" content="🇫🇷 I'm French Administrator & Discord Moderator — Découvrez mes expériences et mon activité Discord en direct." />
   <meta property="og:image" content="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true&borderRadius=20px&hideBadges=false" />
@@ -16,17 +20,12 @@
   <meta name="twitter:image" content="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true&borderRadius=20px" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1389549494143553657/1428005144359862314/dda9de54ce152f8e2c45b74349161cf0.webp?ex=68f0eced&is=68ef9b6d&hm=32359354021aa7bb1c3ccfba9708bfe05d99142f5f6aa5211b604e37f56e49bc&=&format=webp" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loucas - Portfolio</title>
+  <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1389549494143553657/1428005144359862314/dda9de54ce152f8e2c45b74349161cf0.webp" />
 
   <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+  <!-- ✅ Style -->
   <style>
     * {
       margin: 0;
@@ -38,21 +37,21 @@
       font-family: 'Poppins', sans-serif;
       background: #0a0a0a;
       color: #fff;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* ✅ Fond dynamique de villes */
+    /* ✅ Fond dynamique */
     .background {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -2;
       background-size: cover;
       background-position: center;
       filter: blur(8px) brightness(0.3);
@@ -77,14 +76,14 @@
 
     /* ✅ Carte principale */
     .card {
-      background: rgba(20, 20, 30, 0.6);
+      background: rgba(20, 20, 30, 0.65);
       backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 25px;
-      padding: 40px 30px;
+      padding: 35px 25px;
       text-align: center;
       width: 90%;
-      max-width: 550px;
+      max-width: 480px;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
       animation: slideUp 1.2s ease forwards;
       opacity: 0;
@@ -96,7 +95,7 @@
     }
 
     h1 {
-      font-size: 2.4em;
+      font-size: 2em;
       margin-bottom: 10px;
       background: linear-gradient(135deg, #5865f2, #00c6ff);
       -webkit-background-clip: text;
@@ -105,15 +104,16 @@
 
     .bio {
       color: #b9bbbe;
-      font-size: 1em;
-      margin-bottom: 25px;
+      font-size: 0.95em;
+      margin-bottom: 20px;
+      line-height: 1.4;
     }
 
     /* ✅ Discord card */
     .discord-card img {
       width: 100%;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(88, 101, 242, 0.4);
+      box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
       transition: transform 0.3s ease;
     }
 
@@ -125,13 +125,13 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       background: rgba(88, 101, 242, 0.15);
       border: 1px solid #5865f2;
       color: #fff;
       padding: 10px 20px;
       border-radius: 25px;
-      margin-top: 25px;
+      margin-top: 20px;
       text-decoration: none;
       font-weight: 600;
       transition: all 0.3s ease;
@@ -140,19 +140,20 @@
     .btn:hover {
       background: #5865f2;
       transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4);
+      box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
     }
 
     /* ✅ Réseaux sociaux */
     .socials {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
+      gap: 18px;
+      margin-top: 25px;
+      flex-wrap: wrap;
     }
 
     .socials a {
-      font-size: 1.4em;
+      font-size: 1.5em;
       color: #fff;
       transition: all 0.3s ease;
     }
@@ -165,8 +166,8 @@
     /* ✅ Bouton fond */
     .bg-button {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      top: 15px;
+      right: 15px;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -175,6 +176,7 @@
       color: white;
       cursor: pointer;
       font-weight: 600;
+      font-size: 0.9em;
       transition: all 0.3s ease;
       z-index: 1000;
     }
@@ -184,64 +186,88 @@
       transform: translateY(-2px);
     }
 
+    /* ✅ Responsive mobile */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px;
+        overflow-y: auto;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .bio {
+        font-size: 0.9em;
+      }
+
+      .btn {
+        font-size: 0.9em;
+        padding: 9px 18px;
+      }
+
+      .bg-button {
+        font-size: 0.8em;
+        padding: 8px 14px;
+      }
+
+      .discord-card img {
+        border-radius: 15px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <div class="background" id="background"></div>
   <div class="overlay"></div>
 
-  <button class="bg-button" onclick="changeBackground()">🌆 Changer de fond</button>
+  <button class="bg-button" onclick="changeBackground()">🌆 Fond</button>
 
   <div class="card">
     <h1>Loucas</h1>
-    <p class="bio"> I'm French Administrator & Discord Moderator</p>
+    <p class="bio">🇫🇷 French Administrator & Discord Moderator</p>
 
-    <!-- 🟣 Profil Discord -->
     <div class="discord-card">
       <a href="https://discord.com/users/924263589798346762" target="_blank">
-        <img
-          src="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark)](https://discord.gg/SgGmCwNQD4"
-          alt="Discord Presence"
-        />
+        <img src="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true&borderRadius=20px" alt="Discord Presence" />
       </a>
     </div>
 
-    <!-- Bouton expériences -->
     <a href="experiences.html" class="btn">
       <i class="fa-solid fa-briefcase"></i> Expériences
     </a>
 
-    <!-- Réseaux sociaux -->
     <div class="socials">
       <a href="https://discord.gg/SgGmCwNQD4" target="_blank"><i class="fa-brands fa-discord"></i></a>
       <a href="https://x.com/loucass_pro?s=21" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://open.spotify.com/user/31emwutm3fxeduwugqfb6gtyhgvi?si=zRh-_WOyTyOC8qA6RF8kWg&nd=1&dlsi=0e5d7d1b80314258" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+      <a href="https://open.spotify.com/user/31emwutm3fxeduwugqfb6gtyhgvi" target="_blank"><i class="fa-brands fa-spotify"></i></a>
       <a href="https://www.youtube.com/@loucas__s" target="_blank"><i class="fa-brands fa-youtube"></i></a>
     </div>
   </div>
 
   <script>
     const cityBackgrounds = [
-      "https://i.pinimg.com/originals/f2/72/4b/f2724b83ff1bc490c66833dd1babbbdb.gif", // NYC night
-      "https://i.pinimg.com/originals/c7/cb/30/c7cb3072d3713a3d75a94c059f1e1049.gif", // Paris
-      "https://i.pinimg.com/originals/99/5b/29/995b2937b723696d3a577b7ddc029568.gif", // Tokyo
-      "https://i.pinimg.com/originals/b3/21/30/b32130cdf0080d0d9268bc4ed0b12e07.gif", // London
-      "https://i.pinimg.com/originals/a8/f0/58/a8f058875e75e78f868a21e628e4ded1.gif", // LA
-      "https://i.pinimg.com/originals/72/84/e5/7284e5aba04b0b81be01a2c6fdd13d5a.gif"  // Paris repeat for balance
+      "https://i.pinimg.com/originals/f2/72/4b/f2724b83ff1bc490c66833dd1babbbdb.gif",
+      "https://i.pinimg.com/originals/c7/cb/30/c7cb3072d3713a3d75a94c059f1e1049.gif",
+      "https://i.pinimg.com/originals/99/5b/29/995b2937b723696d3a577b7ddc029568.gif",
+      "https://i.pinimg.com/originals/b3/21/30/b32130cdf0080d0d9268bc4ed0b12e07.gif",
+      "https://i.pinimg.com/originals/a8/f0/58/a8f058875e75e78f868a21e628e4ded1.gif",
+      "https://i.pinimg.com/originals/72/84/e5/7284e5aba04b0b81be01a2c6fdd13d5a.gif"
     ];
 
     let currentBg = 0;
+    const backgroundEl = document.getElementById("background");
 
     function changeBackground() {
       currentBg = (currentBg + 1) % cityBackgrounds.length;
-      document.getElementById("background").style.backgroundImage = `url('${cityBackgrounds[currentBg]}')`;
+      backgroundEl.style.backgroundImage = `url('${cityBackgrounds[currentBg]}')`;
     }
 
-    // init background
-    document.getElementById("background").style.backgroundImage = `url('${cityBackgrounds[0]}')`;
-
-    // auto change every 15s
+    // init + auto rotation
+    backgroundEl.style.backgroundImage = `url('${cityBackgrounds[0]}')`;
     setInterval(changeBackground, 15000);
   </script>
 </body>
 </html>
+
