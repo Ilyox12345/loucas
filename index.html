@@ -2,22 +2,15 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Loucas - Portfolio</title>
 
-  <!-- ✅ Open Graph Meta (Discord / Facebook / etc.) -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Loucas - French Discord Administrator & Moderator" />
   <meta property="og:description" content="🇫🇷 I'm French Administrator & Discord Moderator — Découvrez mes expériences et mon activité Discord en direct." />
-  <meta property="og:image" content="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true&borderRadius=20px&hideBadges=false" />
+  <meta property="og:image" content="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true" />
   <meta property="og:url" content="https://loucas.pages.dev" />
   <meta property="og:type" content="website" />
-  <meta property="og:locale" content="fr_FR" />
-
-  <!-- ✅ Twitter Card Meta -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Loucas - Discord Administrator & Moderator" />
-  <meta name="twitter:description" content="🇫🇷 French Administrator & Discord Moderator • View my live Discord profile and experiences." />
-  <meta name="twitter:image" content="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true&borderRadius=20px" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1389549494143553657/1428005144359862314/dda9de54ce152f8e2c45b74349161cf0.webp" />
@@ -25,7 +18,6 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- ✅ Style -->
   <style>
     * {
       margin: 0;
@@ -33,35 +25,26 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       font-family: 'Poppins', sans-serif;
       background: #0a0a0a;
       color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-y: auto;
     }
 
-    /* ✅ Fond dynamique */
+    /* 🌆 Fond animé */
     .background {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
       background-size: cover;
       background-position: center;
-      filter: blur(8px) brightness(0.3);
+      filter: blur(5px) brightness(0.4);
+      z-index: -2;
       transition: background-image 1s ease-in-out;
-      animation: fadeInBg 2s ease;
-    }
-
-    @keyframes fadeInBg {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
 
     .overlay {
@@ -70,28 +53,49 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 0.6);
       z-index: -1;
     }
 
-    /* ✅ Carte principale */
-    .card {
-      background: rgba(20, 20, 30, 0.65);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 25px;
-      padding: 35px 25px;
-      text-align: center;
-      width: 90%;
-      max-width: 480px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-      animation: slideUp 1.2s ease forwards;
-      opacity: 0;
+    /* 🔘 Bouton changement de fond */
+    .bg-button {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 0.9em;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
     }
 
-    @keyframes slideUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .bg-button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* 📦 Carte principale */
+    .card {
+      background: rgba(20, 20, 30, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      width: 90%;
+      max-width: 420px;
+      margin: 100px auto 40px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
@@ -103,17 +107,17 @@
     }
 
     .bio {
-      color: #b9bbbe;
+      color: #c6c6c6;
       font-size: 0.95em;
       margin-bottom: 20px;
-      line-height: 1.4;
     }
 
-    /* ✅ Discord card */
+    /* 🟣 Image Discord */
     .discord-card img {
       width: 100%;
-      border-radius: 20px;
+      border-radius: 15px;
       box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
+      margin-bottom: 20px;
       transition: transform 0.3s ease;
     }
 
@@ -121,41 +125,39 @@
       transform: scale(1.02);
     }
 
-    /* ✅ Bouton expérience */
+    /* 🧳 Bouton expériences */
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(88, 101, 242, 0.15);
-      border: 1px solid #5865f2;
-      color: #fff;
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 25px;
-      margin-top: 20px;
-      text-decoration: none;
+      border: 1px solid #5865f2;
+      background: rgba(88,101,242,0.2);
+      color: white;
       font-weight: 600;
-      transition: all 0.3s ease;
+      text-decoration: none;
+      transition: 0.3s;
     }
 
     .btn:hover {
       background: #5865f2;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+      box-shadow: 0 4px 15px rgba(88,101,242,0.4);
     }
 
-    /* ✅ Réseaux sociaux */
+    /* 🔗 Réseaux sociaux */
     .socials {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 18px;
       margin-top: 25px;
-      flex-wrap: wrap;
     }
 
     .socials a {
       font-size: 1.5em;
-      color: #fff;
-      transition: all 0.3s ease;
+      color: white;
+      transition: 0.3s;
     }
 
     .socials a:hover {
@@ -163,57 +165,14 @@
       transform: translateY(-3px);
     }
 
-    /* ✅ Bouton fond */
-    .bg-button {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 10px 18px;
-      border-radius: 20px;
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.9em;
-      transition: all 0.3s ease;
-      z-index: 1000;
-    }
-
-    .bg-button:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-    }
-
-    /* ✅ Responsive mobile */
+    /* 📱 Mobile responsive */
     @media (max-width: 480px) {
-      body {
-        padding: 20px;
-        overflow-y: auto;
-      }
-
-      h1 {
-        font-size: 1.8em;
-      }
-
-      .bio {
-        font-size: 0.9em;
-      }
-
-      .btn {
-        font-size: 0.9em;
-        padding: 9px 18px;
-      }
-
-      .bg-button {
-        font-size: 0.8em;
-        padding: 8px 14px;
-      }
-
-      .discord-card img {
-        border-radius: 15px;
-      }
+      h1 { font-size: 1.7em; }
+      .bio { font-size: 0.9em; }
+      .btn { font-size: 0.9em; padding: 9px 16px; }
+      .bg-button { font-size: 0.8em; padding: 6px 12px; }
+      .discord-card img { border-radius: 12px; }
+      .card { margin: 80px auto 30px; padding: 20px 15px; }
     }
   </style>
 </head>
@@ -222,7 +181,7 @@
   <div class="background" id="background"></div>
   <div class="overlay"></div>
 
-  <button class="bg-button" onclick="changeBackground()">🌆 Fond</button>
+  <button class="bg-button" onclick="changeBackground()">Changer de fond</button>
 
   <div class="card">
     <h1>Loucas</h1>
@@ -230,7 +189,7 @@
 
     <div class="discord-card">
       <a href="https://discord.com/users/924263589798346762" target="_blank">
-        <img src="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true&borderRadius=20px" alt="Discord Presence" />
+        <img src="https://lanyard.cnrad.dev/api/1324013060914151486?theme=dark&bg=0d1117&animated=true&borderRadius=15px" alt="Discord Presence" />
       </a>
     </div>
 
@@ -247,27 +206,27 @@
   </div>
 
   <script>
+    // 🌆 Liste des fonds de ville
     const cityBackgrounds = [
       "https://i.pinimg.com/originals/f2/72/4b/f2724b83ff1bc490c66833dd1babbbdb.gif",
       "https://i.pinimg.com/originals/c7/cb/30/c7cb3072d3713a3d75a94c059f1e1049.gif",
       "https://i.pinimg.com/originals/99/5b/29/995b2937b723696d3a577b7ddc029568.gif",
       "https://i.pinimg.com/originals/b3/21/30/b32130cdf0080d0d9268bc4ed0b12e07.gif",
       "https://i.pinimg.com/originals/a8/f0/58/a8f058875e75e78f868a21e628e4ded1.gif",
-      "https://i.pinimg.com/originals/72/84/e5/7284e5aba04b0b81be01a2c6fdd13d5a.gif"
     ];
 
     let currentBg = 0;
-    const backgroundEl = document.getElementById("background");
+    const bgEl = document.getElementById("background");
 
     function changeBackground() {
       currentBg = (currentBg + 1) % cityBackgrounds.length;
-      backgroundEl.style.backgroundImage = `url('${cityBackgrounds[currentBg]}')`;
+      bgEl.style.backgroundImage = `url('${cityBackgrounds[currentBg]}')`;
     }
 
-    // init + auto rotation
-    backgroundEl.style.backgroundImage = `url('${cityBackgrounds[0]}')`;
+    bgEl.style.backgroundImage = `url('${cityBackgrounds[0]}')`;
     setInterval(changeBackground, 15000);
   </script>
 </body>
 </html>
+
 
