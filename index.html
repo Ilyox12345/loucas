@@ -131,15 +131,19 @@
 
     .profile-pic:hover { transform: scale(1.05); }
 
-    .status-dot {
+    .status-icon {
       position: absolute;
-      bottom: 15px;
-      right: 15px;
-      width: 22px;
-      height: 22px;
+      bottom: 12px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       border: 3px solid #1a1a1a;
-      background-color: gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #747f8d;
+      font-size: 14px;
     }
 
     /* ✨ Mini description */
@@ -210,12 +214,14 @@
     <!-- 📸 Profil + statut -->
     <div class="profile-container">
       <img class="profile-pic" src="https://media.discordapp.net/attachments/1389549494143553657/1428005144359862314/dda9de54ce152f8e2c45b74349161cf0.webp?ex=68f0eced&is=68ef9b6d&hm=32359354021aa7bb1c3ccfba9708bfe05d99142f5f6aa5211b604e37f56e49bc&=&format=webp" alt="Loucas profile picture">
-      <span class="status-dot" id="status-dot"></span>
+      <div class="status-icon" id="status-icon"><i class="fa-solid fa-circle"></i></div>
     </div>
 
-    <p class="mini-desc">👔 Bonjour, je suis Loucas, Administrateur et membre du staff Discord.
-J’assure la modération, la gestion et la coordination du serveur afin de garantir une expérience agréable et bienveillante pour tous les membres.
-Sérieux, à l’écoute et disponible, je veille à maintenir un environnement sain et respectueux au sein de la communauté.</p>
+    <p class="mini-desc">
+      👔 Bonjour, je suis Loucas, Administrateur et membre du staff Discord.<br>
+      J’assure la modération, la gestion et la coordination du serveur afin de garantir une expérience agréable et bienveillante pour tous.<br>
+      Sérieux, à l’écoute et disponible, je veille à maintenir un environnement sain et respectueux au sein de la communauté.
+    </p>
 
     <a href="experiences.html" class="btn">
       <i class="fa-solid fa-briefcase"></i> Expériences
@@ -253,9 +259,9 @@ Sérieux, à l’écoute et disponible, je veille à maintenir un environnement 
     bgEl.style.backgroundImage = `url('${cityBackgrounds[0]}')`;
     setInterval(changeBackground, 15000);
 
-    // ✅ Statut Discord via Lanyard API
-    const userId = "1324013060914151486"; // Ton ID Discord
-    const statusDot = document.getElementById("status-dot");
+    // ✅ Statut Discord via Lanyard API avec vraies icônes
+    const userId = "1324013060914151486";
+    const statusIcon = document.getElementById("status-icon");
 
     async function updateStatus() {
       try {
@@ -263,14 +269,30 @@ Sérieux, à l’écoute et disponible, je veille à maintenir un environnement 
         const data = await res.json();
         if (data && data.success) {
           const status = data.data.discord_status;
-          let color = "gray";
+          let iconHTML = "";
+          let bgColor = "";
+
           switch (status) {
-            case "online": color = "#43b581"; break;    // vert
-            case "idle": color = "#faa61a"; break;      // jaune
-            case "dnd": color = "#f04747"; break;       // rouge
-            case "offline": color = "#747f8d"; break;   // gris
+            case "online":
+              iconHTML = '<i class="fa-solid fa-circle"></i>';
+              bgColor = "#43b581";
+              break;
+            case "idle":
+              iconHTML = '<i class="fa-solid fa-moon"></i>';
+              bgColor = "#faa61a";
+              break;
+            case "dnd":
+              iconHTML = '<i class="fa-solid fa-minus"></i>';
+              bgColor = "#f04747";
+              break;
+            default:
+              iconHTML = '<i class="fa-regular fa-circle"></i>';
+              bgColor = "#747f8d";
+              break;
           }
-          statusDot.style.backgroundColor = color;
+
+          statusIcon.innerHTML = iconHTML;
+          statusIcon.style.backgroundColor = bgColor;
         }
       } catch (err) {
         console.error("Erreur de statut Discord :", err);
@@ -278,9 +300,7 @@ Sérieux, à l’écoute et disponible, je veille à maintenir un environnement 
     }
 
     updateStatus();
-    setInterval(updateStatus, 10000); // met à jour toutes les 10s
+    setInterval(updateStatus, 10000);
   </script>
 </body>
 </html>
-
-
