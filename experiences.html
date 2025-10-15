@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loucas - Expérience</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(20, 20, 30, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 520px;
+      backdrop-filter: blur(15px);
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
+    }
+
+    .xp {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .xp:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .xp img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .xp i {
+      color: #5865f2;
+      margin-right: 5px;
+    }
+
+    .xp .info {
+      text-align: left;
+    }
+
+    .xp .info b {
+      color: #fff;
+    }
+
+    .xp .info span {
+      color: #b9bbbe;
+      font-size: 0.9em;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 25px;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💼 Expérience</h1>
+
+    <div class="xp">
+      <img src="https://yt3.googleusercontent.com/1B33JhHzPZp-ZTLLokCXfIgA1IdTyEViRMS-TK4S33wWT1qDnM61c1O4sEyNpz8lDAcfiYSWqA=s900-c-k-c0x00ffffff-no-rj" alt="@Staizix">
+      <div class="info">
+        <div><i class="fa-solid fa-crown"></i> <b>Admin</b> – @Staizix</div>
+        <span>Gestion de la modération et de la communauté.</span>
+      </div>
+    </div>
+
+    <div class="xp">
+      <img src="https://yt3.googleusercontent.com/8xlTDkBGxH-QO-7LrHQrRFjmAy31d49nPPbLk1CVJygOVinGQ4HpSZvpoeeXxTBqD8qWmdRL=s900-c-k-c0x00ffffff-no-rj" alt="@The Corbeau">
+      <div class="info">
+        <div><i class="fa-solid fa-bolt"></i> <b>Resp</b> – @The Corbeau</div>
+        <span>Supervision et gestion du staff.</span>
+      </div>
+    </div>
+
+    <div class="xp">
+      <img src="https://yt3.googleusercontent.com/n8No1x24DOo3HbJwk6kkWAbRO6lm21oywL2VldZpBEQYX2Er_XHFQSBg_USwd_3O4Lr8LvTxpw=s900-c-k-c0x00ffffff-no-rj" alt="@Nanass">
+      <div class="info">
+        <div><i class="fa-solid fa-screwdriver-wrench"></i> <b>Helper</b> – @Nanass</div>
+        <span>Support technique et aide au staff.</span>
+      </div>
+    </div>
+
+    <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+  </div>
+</body>
+</html>
