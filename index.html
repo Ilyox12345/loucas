@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loucas - Portfolio</title>
 
-  <!-- Meta -->
   <meta property="og:title" content="Loucas - French Discord Administrator & Moderator" />
   <meta property="og:description" content="🇫🇷 I'm French Administrator & Discord Moderator — Découvrez mes expériences et mon activité Discord en direct." />
   <meta property="og:image" content="https://loucas.pages.dev/cacaz.webp" />
@@ -30,7 +29,7 @@
       overflow: hidden;
     }
 
-    /* 🌆 Arrière-plan animé */
+    /* 🌆 Fond animé */
     .background {
       position: fixed;
       top: 0; left: 0;
@@ -57,7 +56,6 @@
       z-index: -1;
     }
 
-    /* Bouton de fond */
     .bg-button {
       position: fixed;
       top: 15px;
@@ -79,18 +77,19 @@
       transform: translateY(-2px);
     }
 
-    /* Carte principale */
-    .card {
+    /* 🟣 Style général des bulles */
+    .bubble {
       background: rgba(25, 25, 35, 0.8);
-      border-radius: 20px;
       border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
       backdrop-filter: blur(15px);
       text-align: center;
-      padding: 30px 20px;
+      padding: 25px 20px;
       width: 90%;
       max-width: 420px;
-      animation: fadeIn 1s ease-out;
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-out;
     }
 
     @keyframes fadeIn {
@@ -100,7 +99,8 @@
 
     h1 {
       font-size: 2em;
-      margin-bottom: 10px;
+      margin-top: 15px;
+      margin-bottom: 5px;
       background: linear-gradient(135deg, #5865f2, #00c6ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -109,10 +109,9 @@
     .bio {
       color: #b9bbbe;
       font-size: 0.95em;
-      margin-bottom: 25px;
     }
 
-    /* 📸 Image de profil + statut */
+    /* 📸 Pdp + statut */
     .profile-container {
       position: relative;
       display: inline-block;
@@ -125,7 +124,6 @@
       object-fit: cover;
       border: 3px solid #5865f2;
       box-shadow: 0 0 25px rgba(88, 101, 242, 0.5);
-      margin-bottom: 20px;
       transition: transform 0.3s ease;
     }
 
@@ -133,7 +131,7 @@
 
     .status-icon {
       position: absolute;
-      bottom: 12px;
+      bottom: 10px;
       right: 12px;
       width: 28px;
       height: 28px;
@@ -146,14 +144,33 @@
       font-size: 14px;
     }
 
-    /* ✨ Mini description */
-    .mini-desc {
+    /* 💬 Description */
+    .description {
       color: #b9bbbe;
       font-size: 0.9em;
-      margin-bottom: 25px;
+      line-height: 1.5em;
     }
 
-    /* Bouton Expériences */
+    /* 🌐 Réseaux */
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 5px;
+    }
+
+    .socials a {
+      font-size: 1.6em;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      color: #5865f2;
+      transform: translateY(-3px);
+    }
+
+    /* Expériences bouton */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -166,37 +183,13 @@
       font-weight: 600;
       text-decoration: none;
       transition: 0.3s;
+      margin-top: 10px;
     }
 
     .btn:hover {
       background: #5865f2;
       box-shadow: 0 4px 15px rgba(88,101,242,0.4);
       transform: translateY(-2px);
-    }
-
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      margin-top: 25px;
-    }
-
-    .socials a {
-      font-size: 1.5em;
-      color: white;
-      transition: 0.3s;
-    }
-
-    .socials a:hover {
-      color: #5865f2;
-      transform: translateY(-3px);
-    }
-
-    @media (max-width: 480px) {
-      .card { padding: 20px 15px; margin-top: 80px; }
-      h1 { font-size: 1.7em; }
-      .bio { font-size: 0.9em; }
-      .btn { font-size: 0.9em; }
     }
   </style>
 </head>
@@ -207,23 +200,29 @@
 
   <button class="bg-button" onclick="changeBackground()">🌹Changer de fond</button>
 
-  <div class="card">
-    <h1>Loucas</h1>
-    <p class="bio">🇫🇷 French Administrator & Discord Moderator</p>
-
-    <!-- 📸 Profil + statut -->
+  <!-- 🟣 Bulle 1 : profil -->
+  <div class="bubble">
     <div class="profile-container">
       <img class="profile-pic" src="https://github.com/Ilyox12345/loucas/blob/main/cacaz.webp?raw=true" alt="Loucas profile picture">
       <div class="status-icon" id="status-icon"><i class="fa-solid fa-circle"></i></div>
     </div>
+    <h1>Loucas</h1>
+    <p class="bio">🇫🇷 French Administrator & Discord Moderator</p>
+    <a href="experiences.html" class="btn"><i class="fa-solid fa-briefcase"></i> Expériences</a>
+  </div>
 
-    <p class="mini-desc">
+  <!-- 🟣 Bulle 2 : bio -->
+  <div class="bubble">
+    <p class="description">
+      Passionné par la modération, la gestion d’équipes et la structure des serveurs Discord.  
+      J’aime organiser, améliorer et créer des espaces communautaires actifs et respectueux.  
+      Ouvert à de nouveaux projets collaboratifs.
     </p>
+  </div>
 
-    <a href="experiences.html" class="btn">
-      <i class="fa-solid fa-briefcase"></i> Expériences
-    </a>
-
+  <!-- 🟣 Bulle 3 : réseaux -->
+  <div class="bubble">
+    <h2 style="font-size:1.2em; margin-bottom:10px;">Mes réseaux</h2>
     <div class="socials">
       <a href="https://discord.gg/SgGmCwNQD4" target="_blank"><i class="fa-brands fa-discord"></i></a>
       <a href="https://x.com/loucass_pro?s=21" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
@@ -256,7 +255,6 @@
     bgEl.style.backgroundImage = `url('${cityBackgrounds[0]}')`;
     setInterval(changeBackground, 15000);
 
-    // ✅ Statut Discord via Lanyard API avec vraies icônes
     const userId = "1324013060914151486";
     const statusIcon = document.getElementById("status-icon");
 
