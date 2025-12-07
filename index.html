@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loucas - Portfolio</title>
+
+  <meta property="og:title" content="Loucas - French Discord Administrator & Moderator" />
+  <meta property="og:description" content="🇫🇷 I'm French Administrator & Discord Moderator — Découvrez mes expériences et mon activité Discord en direct." />
+  <meta property="og:image" content="https://loucas.pages.dev/cacaz.webp" />
+  <meta property="og:url" content="https://loucas.pages.dev" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="https://media.discordapp.net/attachments/1389549494143553657/1428005144359862314/dda9de54ce152f8e2c45b74349161cf0.webp" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 20px 0;
+    }
+
+    /* 🌆 Fond animé amélioré */
+    .background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 110%;
+      height: 110%;
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px) brightness(0.35);
+      z-index: -2;
+      transition: opacity 1.2s ease-in-out, transform 0.5s ease;
+      animation: slowZoom 30s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.08) rotate(0.5deg); }
+      100% { transform: scale(1.15) rotate(-0.5deg); }
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(88, 101, 242, 0.15), rgba(0, 0, 0, 0.7));
+      z-index: -1;
+    }
+
+    /* Flocons de neige */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      pointer-events: none;
+      z-index: 1000;
+      user-select: none;
+      animation: snowfall linear infinite;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+      opacity: 0.8;
+    }
+
+    @keyframes snowfall {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100vh) translateX(100px) rotate(360deg);
+        opacity: 0.4;
+      }
+    }
+
+    /* Boutons de contrôle */
+    .controls {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .bg-button, .music-toggle {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      border-radius: 20px;
+      padding: 10px 18px;
+      font-size: 0.9em;
+      cursor: pointer;
+      backdrop-filter: blur(15px);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bg-button:hover, .music-toggle:hover {
+      background: rgba(88, 101, 242, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(88, 101, 242, 0.4);
+    }
+
+    /* Player de musique */
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(25, 25, 35, 0.95);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 25px;
+      padding: 15px 25px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 100;
+      min-width: 350px;
+      transition: all 0.4s ease;
+    }
+
+    .music-player.hidden {
+      transform: translateX(-50%) translateY(150%);
+      opacity: 0;
+    }
+
+    .play-pause-btn {
+      background: linear-gradient(135deg, #5865f2, #00c6ff);
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.5);
+    }
+
+    .play-pause-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(88, 101, 242, 0.7);
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .volume-slider {
+      flex: 1;
+      height: 6px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5865f2, #00c6ff);
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(88, 101, 242, 0.6);
+      transition: all 0.2s ease;
+    }
+
+    .volume-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .volume-icon {
+      color: #5865f2;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .volume-icon:hover {
+      color: #00c6ff;
+      transform: scale(1.1);
+    }
+
+    .song-info {
+      font-size: 0.85em;
+      color: #b9bbbe;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+
+    /* 🟣 Bulles améliorées */
+    .bubble {
+      background: rgba(25, 25, 35, 0.85);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 25px;
+      backdrop-filter: blur(20px);
+      text-align: center;
+      padding: 30px 25px;
+      width: 90%;
+      max-width: 450px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 80px rgba(88, 101, 242, 0.1);
+      margin-bottom: 25px;
+      animation: fadeInUp 0.8s ease-out;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bubble::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(88, 101, 242, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .bubble:hover::before {
+      left: 100%;
+    }
+
+    .bubble:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 100px rgba(88, 101, 242, 0.2);
+      border-color: rgba(88, 101, 242, 0.4);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #5865f2, #00c6ff, #ff006e);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 4s ease infinite;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .bio {
+      color: #b9bbbe;
+      font-size: 1em;
+      font-weight: 500;
+    }
+
+    /* 📸 Photo de profil améliorée */
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid transparent;
+      background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+                  linear-gradient(135deg, #5865f2, #00c6ff) border-box;
+      box-shadow: 0 0 30px rgba(88, 101, 242, 0.6), 0 0 60px rgba(0, 198, 255, 0.3);
+      transition: all 0.4s ease;
+      animation: profilePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes profilePulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(88, 101, 242, 0.6), 0 0 60px rgba(0, 198, 255, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(88, 101, 242, 0.8), 0 0 80px rgba(0, 198, 255, 0.5); }
+    }
+
+    .profile-pic:hover { 
+      transform: scale(1.08) rotate(5deg);
+      box-shadow: 0 0 50px rgba(88, 101, 242, 0.9), 0 0 100px rgba(0, 198, 255, 0.6);
+    }
+
+    .status-icon {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 3px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #747f8d;
+      font-size: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.8);
+      animation: statusBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes statusBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* 💬 Description */
+    .description {
+      color: #d1d3d6;
+      font-size: 0.95em;
+      line-height: 1.7em;
+      font-weight: 400;
+    }
+
+    /* 🌐 Réseaux sociaux améliorés */
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 8px;
+    }
+
+    .socials a {
+      font-size: 1.8em;
+      color: white;
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .socials a::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5865f2, #00c6ff);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .socials a:hover::before {
+      opacity: 1;
+    }
+
+    .socials a:hover {
+      color: white;
+      transform: translateY(-5px) rotate(10deg);
+      box-shadow: 0 10px 30px rgba(88, 101, 242, 0.5);
+    }
+
+    /* Bouton expériences */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: 2px solid transparent;
+      background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+                  linear-gradient(135deg, #5865f2, #00c6ff) border-box;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      margin-top: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #5865f2, #00c6ff);
+      transition: left 0.4s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 0;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+    }
+
+    h2 {
+      background: linear-gradient(135deg, #5865f2, #00c6ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.3em;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .music-player {
+        min-width: 90%;
+        padding: 12px 15px;
+      }
+      
+      .controls {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background" id="background"></div>
+  <div class="overlay"></div>
+
+  <!-- Flocons de neige -->
+  <script>
+    const snowflakes = ['❄', '❅', '❆'];
+    for(let i = 0; i < 50; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      snowflake.style.animationDelay = Math.random() * 5 + 's';
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+      document.body.appendChild(snowflake);
+    }
+  </script>
+
+  <div class="controls">
+    <button class="bg-button" onclick="changeBackground()">
+      <i class="fa-solid fa-image"></i> Changer fond
+    </button>
+    <button class="music-toggle" onclick="toggleMusicPlayer()">
+      <i class="fa-solid fa-music"></i> Musique
+    </button>
+  </div>
+
+  <!-- Player de musique -->
+  <div class="music-player" id="musicPlayer">
+    <button class="play-pause-btn" onclick="togglePlayPause()">
+      <i class="fa-solid fa-play" id="playPauseIcon"></i>
+    </button>
+    <div class="song-info">Malabar</div>
+    <div class="volume-control">
+      <i class="fa-solid fa-volume-high volume-icon" id="volumeIcon" onclick="toggleMute()"></i>
+      <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider" oninput="changeVolume(this.value)">
+    </div>
+  </div>
+
+  <!-- Audio élément -->
+  <audio id="audioPlayer" loop>
+    <source src="./MALABAR.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 🟣 Bulle 1 : profil -->
+  <div class="bubble">
+    <div class="profile-container">
+      <img class="profile-pic" src="./loucas.gif" alt="Loucas profile picture">
+      <div class="status-icon" id="status-icon"><i class="fa-solid fa-circle"></i></div>
+    </div>
+    <h1>Loucas</h1>
+    <p class="bio">🇫🇷 French Administrator & Discord Moderator</p>
+    <a href="experiences.html" class="btn"><i class="fa-solid fa-briefcase"></i> Mes Expériences</a>
+  </div>
+
+  <!-- 🟣 Bulle 2 : bio -->
+  <div class="bubble">
+    <p class="description">
+      Passionné par la modération, la gestion d'équipes et la structure des serveurs Discord.  
+      J'aime organiser, améliorer et créer des espaces communautaires actifs et respectueux.  
+      Ouvert à de nouveaux projets collaboratifs et toujours prêt à relever de nouveaux défis.
+    </p>
+  </div>
+
+  <!-- 🟣 Bulle 3 : réseaux -->
+  <div class="bubble">
+    <h2>Mes Réseaux</h2>
+    <div class="socials">
+      <a href="https://discord.gg/SgGmCwNQD4" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://x.com/loucass_pro?s=21" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://open.spotify.com/user/31emwutm3fxeduwugqfb6gtyhgvi" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+      <a href="https://www.youtube.com/@loucas__s" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+  </div>
+
+  <script>
+    const cityBackgrounds = [
+      "https://i.pinimg.com/originals/f2/72/4b/f2724b83ff1bc490c66833dd1babbbdb.gif",
+      "https://i.pinimg.com/originals/c7/cb/30/c7cb3072d3713a3d75a94c059f1e1049.gif",
+      "https://i.pinimg.com/originals/99/5b/29/995b2937b723696d3a577b7ddc029568.gif",
+      "https://i.pinimg.com/originals/b3/21/30/b32130cdf0080d0d9268bc4ed0b12e07.gif",
+      "https://i.pinimg.com/originals/a8/f0/58/a8f058875e75e78f868a21e628e4ded1.gif",
+    ];
+
+    let currentBg = 0;
+    const bgEl = document.getElementById("background");
+    const audioPlayer = document.getElementById("audioPlayer");
+    const playPauseIcon = document.getElementById("playPauseIcon");
+    const volumeSlider = document.getElementById("volumeSlider");
+    const volumeIcon = document.getElementById("volumeIcon");
+    const musicPlayer = document.getElementById("musicPlayer");
+
+    // Initialisation
+    audioPlayer.volume = 0.5;
+
+    function changeBackground() {
+      bgEl.style.opacity = 0;
+      setTimeout(() => {
+        currentBg = (currentBg + 1) % cityBackgrounds.length;
+        bgEl.style.backgroundImage = `url('${cityBackgrounds[currentBg]}')`;
+        bgEl.style.opacity = 1;
+      }, 600);
+    }
+
+    bgEl.style.backgroundImage = `url('${cityBackgrounds[0]}')`;
+    setInterval(changeBackground, 20000);
+
+    // Contrôles audio
+    function togglePlayPause() {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        playPauseIcon.className = 'fa-solid fa-pause';
+      } else {
+        audioPlayer.pause();
+        playPauseIcon.className = 'fa-solid fa-play';
+      }
+    }
+
+    function changeVolume(value) {
+      audioPlayer.volume = value / 100;
+      updateVolumeIcon(value);
+    }
+
+    function toggleMute() {
+      if (audioPlayer.volume > 0) {
+        audioPlayer.volume = 0;
+        volumeSlider.value = 0;
+      } else {
+        audioPlayer.volume = 0.5;
+        volumeSlider.value = 50;
+      }
+      updateVolumeIcon(volumeSlider.value);
+    }
+
+    function updateVolumeIcon(value) {
+      if (value == 0) {
+        volumeIcon.className = 'fa-solid fa-volume-xmark volume-icon';
+      } else if (value < 50) {
+        volumeIcon.className = 'fa-solid fa-volume-low volume-icon';
+      } else {
+        volumeIcon.className = 'fa-solid fa-volume-high volume-icon';
+      }
+    }
+
+    function toggleMusicPlayer() {
+      musicPlayer.classList.toggle('hidden');
+    }
+
+    // Statut Discord
+    const userId = "1324013060914151486";
+    const statusIcon = document.getElementById("status-icon");
+
+    async function updateStatus() {
+      try {
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+        const data = await res.json();
+        if (data && data.success) {
+          const status = data.data.discord_status;
+          let iconHTML = "";
+          let bgColor = "";
+
+          switch (status) {
+            case "online":
+              iconHTML = '<i class="fa-solid fa-circle"></i>';
+              bgColor = "#43b581";
+              break;
+            case "idle":
+              iconHTML = '<i class="fa-solid fa-moon"></i>';
+              bgColor = "#faa61a";
+              break;
+            case "dnd":
+              iconHTML = '<i class="fa-solid fa-minus"></i>';
+              bgColor = "#f04747";
+              break;
+            default:
+              iconHTML = '<i class="fa-regular fa-circle"></i>';
+              bgColor = "#747f8d";
+              break;
+          }
+
+          statusIcon.innerHTML = iconHTML;
+          statusIcon.style.backgroundColor = bgColor;
+        }
+      } catch (err) {
+        console.error("Erreur de statut Discord :", err);
+      }
+    }
+
+    updateStatus();
+    setInterval(updateStatus, 10000);
+  </script>
+</body>
+</html>
