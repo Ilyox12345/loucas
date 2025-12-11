@@ -490,7 +490,7 @@
   </div>
 
   <!-- Audio élément -->
-  <audio id="audioPlayer" loop>
+<audio id="audioPlayer" loop autoplay>
     <source src="./MALABAR.mp3" type="audio/mpeg">
   </audio>
 
@@ -541,6 +541,12 @@
     const volumeSlider = document.getElementById("volumeSlider");
     const volumeIcon = document.getElementById("volumeIcon");
     const musicPlayer = document.getElementById("musicPlayer");
+window.addEventListener("load", () => {
+  audioPlayer.volume = 0.5;  
+  audioPlayer.play().catch(() => {
+    console.log("Autoplay bloqué par le navigateur");
+  });
+});
 
     // Initialisation
     audioPlayer.volume = 0.5;
@@ -644,4 +650,3 @@
 </body>
 
 </html>
-
