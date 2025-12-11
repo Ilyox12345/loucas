@@ -542,14 +542,16 @@
     const volumeIcon = document.getElementById("volumeIcon");
     const musicPlayer = document.getElementById("musicPlayer");
 window.addEventListener("load", () => {
-  audioPlayer.volume = 0.5;  
-  audioPlayer.play().catch(() => {
+  audioPlayer.volume = 0.5;
+
+  audioPlayer.play().then(() => {
+    playPauseIcon.className = 'fa-solid fa-pause';
+  }).catch(() => {
     console.log("Autoplay bloqué par le navigateur");
   });
 });
 
     // Initialisation
-    audioPlayer.volume = 0.5;
 
     function changeBackground() {
       bgEl.style.opacity = 0;
